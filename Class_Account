@@ -1,0 +1,35 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+
+class Account:
+    def __init__(self, account_number, account_holder, balance=0):
+        self._account_number = account_number
+        self._account_holder = account_holder
+        self._balance = balance
+
+    def deposit(self, amount):
+        self._balance += amount
+        return f"Deposited ₦{amount}. New balance is ₦{self._balance}."
+
+    def withdraw(self, amount):
+        if amount <= self._balance:
+            self._balance -= amount
+            return f"Withdrew ₦{amount}. New balance is ₦{self._balance}."
+        else:
+            return "Insufficient balance."
+
+    def get_balance(self):
+        return self._balance
+
+    def get_account_number(self):
+        return self._account_number
+
+    def get_account_holder(self):
+        return self._account_holder
+
+    def get_account_type(self):
+        return "Generic"
+
+
