@@ -1,0 +1,70 @@
+class BankApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Bingham Bank - Simpler. Smarter. Better.")
+        self.root.configure(bg="black")
+
+        self.accounts = {}
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        title_frame = tk.Frame(self.root, bg="black")
+        title_frame.pack(pady=10)
+
+        title_label = tk.Label(title_frame, text="Bingham Bank", font=("Helvetica", 24, "bold"), bg="black", fg="white")
+        title_label.pack()
+
+        motto_label = tk.Label(title_frame, text="Simpler. Smarter. Better.", font=("Helvetica", 12), bg="black",
+                               fg="white")
+        motto_label.pack()
+
+        form_frame = tk.Frame(self.root, bg="black")
+        form_frame.pack(pady=10)
+
+        tk.Label(form_frame, text="Name:", bg="black", fg="white").grid(row=0, column=0, sticky=tk.W)
+        self.name_entry = tk.Entry(form_frame)
+        self.name_entry.grid(row=0, column=1)
+
+        tk.Label(form_frame, text="Initial Balance:", bg="black", fg="white").grid(row=1, column=0, sticky=tk.W)
+        self.balance_entry = tk.Entry(form_frame)
+        self.balance_entry.grid(row=1, column=1)
+
+        tk.Label(form_frame, text="Account Type:", bg="black", fg="white").grid(row=2, column=0, sticky=tk.W)
+        self.account_type_var = tk.StringVar(self.root)
+        self.account_type_var.set("Savings")  # default value
+        account_type_menu = tk.OptionMenu(form_frame, self.account_type_var, "Savings", "Current", "Children's",
+                                          "Student")
+        account_type_menu.grid(row=2, column=1)
+
+        tk.Button(form_frame, text="Create Account", command=self.create_account, bg="white", fg="black").grid(row=3,
+                                                                                                               columnspan=2,
+                                                                                                               pady=10)
+
+        transaction_frame = tk.Frame(self.root, bg="black")
+        transaction_frame.pack(pady=10)
+
+        tk.Label(transaction_frame, text="Account Number:", bg="black", fg="white").grid(row=0, column=0, sticky=tk.W)
+        self.account_number_var = tk.StringVar(self.root)
+        self.account_number_menu = tk.OptionMenu(transaction_frame, self.account_number_var, "")
+        self.account_number_menu.grid(row=0, column=1)
+
+        tk.Label(transaction_frame, text="Deposit Amount:", bg="black", fg="white").grid(row=1, column=0, sticky=tk.W)
+        self.deposit_amount_entry = tk.Entry(transaction_frame)
+        self.deposit_amount_entry.grid(row=1, column=1)
+
+        tk.Button(transaction_frame, text="Deposit", command=self.deposit, bg="white", fg="black").grid(row=2,
+                                                                                                        columnspan=2,
+                                                                                                        pady=5)
+
+        tk.Label(transaction_frame, text="Withdraw Amount:", bg="black", fg="white").grid(row=3, column=0, sticky=tk.W)
+        self.withdraw_amount_entry = tk.Entry(transaction_frame)
+        self.withdraw_amount_entry.grid(row=3, column=1)
+
+        tk.Button(transaction_frame, text="Withdraw", command=self.withdraw, bg="white", fg="black").grid(row=4,
+                                                                                                          columnspan=2,
+                                                                                                          pady=5)
+
+        tk.Button(transaction_frame, text="Get Balance", command=self.get_balance, bg="white", fg="black").grid(row=5,
+                                                                                                                columnspan=2,
+                                                                                                                pady=5)
