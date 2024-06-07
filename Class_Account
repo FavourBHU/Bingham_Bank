@@ -33,8 +33,8 @@ class Account:
         return "Generic"
 
 class SavingsAccount(Account):
-    def init(self, account_number, account_holder, balance=0):
-        super().init(account_number, account_holder, balance)
+    def __init__(self, account_number, account_holder, balance=0):
+        super().__init__(account_number, account_holder, balance)
         self._interest_rate = 0.005
         self._withdrawal_limit = 700000
 
@@ -53,3 +53,30 @@ class SavingsAccount(Account):
     def get_account_type(self):
         return "Savings"
 
+# CURRENT AND CHILDREN
+
+
+# Student ACcount
+
+class StudentAccount(Account):
+    def __init__(self, account_number, account_holder, balance=0):
+        super().__init__(account_number, account_holder, balance)
+        self._withdrawal_limit = 2000
+        self._deposit_limit = 50000
+
+    def deposit(self, amount):
+        if amount <= self._deposit_limit:
+            message = super().deposit(amount)
+            return message
+        else:
+            return f"Deposit limit exceeded. Maximum allowed per deposit is ₦{self._deposit_limit}."
+
+    def withdraw(self, amount):
+        if amount <= self._withdrawal_limit:
+            message = super().withdraw(amount)
+            return message
+        else:
+            return f"Withdrawal limit exceeded. Maximum allowed is ₦{self._withdrawal_limit}."
+
+    def get_account_type(self):
+        return "Student"
